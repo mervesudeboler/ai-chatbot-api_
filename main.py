@@ -1,5 +1,5 @@
 import os
-import google.generativeai as genai
+from google import genai
 
 def main():
     api_key = os.getenv("GEMINI_API_KEY")
@@ -7,8 +7,7 @@ def main():
         print("HATA: GEMINI_API_KEY bulunamadı. Terminalde export ettin mi?")
         return
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    client = genai.Client(api_key=api_key)
 
     print("AI Chatbot (Gemini) - çıkmak için Ctrl+C\n")
 
@@ -17,8 +16,11 @@ def main():
         if not user_input:
             continue
 
-        resp = model.generate_content(user_input)
-        print("\nBot:", resp.text, "\n")
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=user_input
+        )
+        print("\nBot:", response.text, "\n")
 
 if __name__ == "__main__":
     main()
