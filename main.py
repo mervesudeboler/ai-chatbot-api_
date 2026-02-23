@@ -4,12 +4,12 @@ from google import genai
 def main():
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        print("HATA: GEMINI_API_KEY bulunamadı. Terminalde export ettin mi?")
+        print("ERROR: GEMINI_API_KEY is not found. Did you export in your Terminal?")
         return
 
     client = genai.Client(api_key=api_key)
 
-    print("AI Chatbot (Gemini) - çıkmak için Ctrl+C\n")
+    print("AI Chatbot (Gemini) - for exit Ctrl+C\n")
 
     while True:
         user_input = input("You: ").strip()
